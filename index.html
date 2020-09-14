@@ -21,6 +21,10 @@
             height: 50vh;
             background-color: rgb(168, 91, 91);
             margin: 25vh auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
         }
         .notice{
             width: 100vw;
@@ -29,9 +33,11 @@
             position: fixed;
             top: 0;
             left: 0;
+
         }
         .bye{
-            display: none;
+            /* display: none; */
+            animation: bye 0.6s ease-in-out;
         }
         .col-3 img{
             width: 100%;
@@ -49,7 +55,78 @@
             color: rgb(255, 255, 255);
         }
         .pText{
+            display: block;
             font-size: 3rem;
+            width: 40vw;
+            height: 4rem;
+        }
+        .gif{
+            width: 50vw;
+            height: 20vh;
+            position: relative;
+            background-color: rgb(37, 109, 151);
+            
+        }
+        .a{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: rgb(155, 113, 113);
+            transform-origin: 0% 0%;
+            /* transform: translate(-50%,-50%); */
+            box-shadow: inset -20px -20px 20px rgb(250, 116, 116);
+            animation: a 3s infinite linear;
+        }
+        .b{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 30px;
+            height: 30px;
+            background-color: #fff;
+            transform-origin: 0% 0%;
+            /* transform: translate(-50%,-50%); */
+            animation: b 5s infinite step-start;
+        }
+        .byebye{
+            display: none;
+        }
+
+        @keyframes a{
+            0%{
+                transform: rotate(0) translate(-50%,-50%);
+            }
+            100%{
+                transform: rotate(720deg) translate(-50%,-50%);
+            }
+        }
+        @keyframes b{
+            0%{
+                transform: rotate(0) translate(-50%,-50%);
+            }
+            25%{
+                transform: rotate(-45deg) ;
+            }
+            50%{
+                transform: rotate(-90deg) translate(-50%,-50%);
+            }
+            75%{
+                transform: rotate(-225deg) translate(-100%,-100%);
+            }
+            100%{
+                transform: rotate(-360deg) translate(-50%,-50%);
+            }
+        }
+        @keyframes bye{
+            0%{
+                opacity: 1;
+            }
+            100%{
+                opacity: 0;
+            }
         }
         
 
@@ -61,7 +138,7 @@
          
           <!-- <div class="row"><span class="pText">0%</span></div> -->
           <div class="row">
-              <div class="col-3"><img src="https://images.pexels.com/photos/2453105/pexels-photo-2453105.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt=""></div>
+              <div class="col-3">zz<img src="https://images.pexels.com/photos/2453105/pexels-photo-2453105.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt=""></div>
               <div class="col-3"><img src="https://images.pexels.com/photos/5053950/pexels-photo-5053950.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt=""></div>
               <div class="col-3"><img src="https://images.pexels.com/photos/2129796/pexels-photo-2129796.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt=""></div>
               <div class="col-3"><img src="https://images.pexels.com/photos/4871011/pexels-photo-4871011.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt=""></div>
@@ -80,12 +157,16 @@
               <div class="col-3"><img src="https://images.pexels.com/photos/4871011/pexels-photo-4871011.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt=""></div>
               <div class="col-3"><img src="https://images.pexels.com/photos/4871011/pexels-photo-4871011.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt=""></div>
               <div class="col-3"><img src="https://images.pexels.com/photos/2129796/pexels-photo-2129796.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt=""></div>
-              <div class="col-3"><img src="https://images.pexels.com/photos/4871011/pexels-photo-4871011.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt=""></div>
+              <div class="col-3">zz<img src="https://images.pexels.com/photos/4871011/pexels-photo-4871011.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt=""></div>
           </div>
       </div>
 
       <div class="notice">
           <div class="box">
+              <div class="gif">
+                 <div class="a"></div>
+                 <div class="b"></div>
+              </div>
             <div class="pText"></div>
           </div>
         <a href="####" class="cancel">X</a>
@@ -133,8 +214,11 @@
             $('.pText').text(current+'%')
             if(current>=100){
                 clearInterval(progressTimer);
-                // $('.notice').addClass('bye')
-                setTimeout( ()=>($('.notice').addClass('bye')),5000);
+                $('.notice').addClass('bye');
+                $('.notice').on('animationend',function(){
+                    $('.notice').addClass('byebye');
+                })
+                // setTimeout( ()=>($('.notice').addClass('byebye')),1000);
             }
             if(current>99.9){
                 current=100
